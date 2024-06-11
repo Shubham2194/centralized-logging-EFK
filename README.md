@@ -4,7 +4,7 @@ Step 1:
 git clone https://github.com/Shubham2194/centralized-logging-EFK.git
 
 
-cd centralized-logging-EFK
+cd centralized-logging-EFK && 
 kubectl apply -f .
 
 kubectl get all
