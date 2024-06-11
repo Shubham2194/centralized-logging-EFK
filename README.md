@@ -13,7 +13,7 @@ kubectl get all
 
 Step 2:
 Lets access the kibana dashboard with the added URL in ingress 
-if you dont have ingress controller please configire it from here ( https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-manifests/ )
+if you dont have ingress controller please configure it from here ( https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-manifests/ )
 
 ![image](https://github.com/Shubham2194/centralized-logging-EFK/assets/83746560/bf937a3b-ded2-489e-b166-ef13aed1821b)
 
