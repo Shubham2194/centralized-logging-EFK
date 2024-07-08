@@ -25,13 +25,18 @@ Step 3:
 Adding basic auth
 
 sudo apt-get install apache2-utils
+
 htpasswd -c auth kibanauser
+
 kubectl create secret generic kibana-basic-auth --from-file=auth -n logging
 
 Now add these annotations in ingress
+
     nginx.ingress.kubernetes.io/auth-type: "basic"
     nginx.ingress.kubernetes.io/auth-secret: "kibana-basic-auth"
     nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+
+![image](https://github.com/Shubham2194/centralized-logging-EFK/assets/83746560/bd0cc1b4-f4c2-49b6-a2a2-c1cbb46df1b8)
 
 
 
