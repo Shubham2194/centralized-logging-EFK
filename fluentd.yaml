@@ -50,9 +50,9 @@ spec:
       - name: fluentd
         image: fluent/fluentd-kubernetes-daemonset:v1.4.2-debian-elasticsearch-1.1
         env:
-          - name:  FLUENT_ELASTICSEARCH_HOST
+          - name: FLUENT_ELASTICSEARCH_HOST
             value: "elasticsearch.logging.svc.cluster.local"
-          - name:  FLUENT_ELASTICSEARCH_PORT
+          - name: FLUENT_ELASTICSEARCH_PORT
             value: "9200"
           - name: FLUENT_ELASTICSEARCH_SCHEME
             value: "http"
@@ -64,16 +64,19 @@ spec:
             value: /var/log/containers/fluent*
         resources:
           limits:
-            memory: 512Mi
+            cpu: 500m
+            memory: 1024Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 200m
+            memory: 512Mi
         volumeMounts:
         - name: varlog
           mountPath: /var/log
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
+        - name: fluentd-buffer
+          mountPath: /fluentd/buffer
       terminationGracePeriodSeconds: 30
       volumes:
       - name: varlog
@@ -82,6 +85,9 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
+      - name: fluentd-buffer
+        emptyDir: {}
+
 ---
 apiVersion: v1
 kind: ServiceAccount
