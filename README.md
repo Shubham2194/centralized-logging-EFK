@@ -21,7 +21,21 @@ if you dont have ingress controller please configure it from here ( https://docs
 
 ![image](https://github.com/Shubham2194/centralized-logging-EFK/assets/83746560/4ebcc192-328e-4b1f-8b2b-1ecbdd38c562)
 
-Step 3: 
+Step 3:
+Adding basic auth
+
+sudo apt-get install apache2-utils
+htpasswd -c auth kibanauser
+kubectl create secret generic kibana-basic-auth --from-file=auth -n logging
+
+Now add these annotations in ingress
+    nginx.ingress.kubernetes.io/auth-type: "basic"
+    nginx.ingress.kubernetes.io/auth-secret: "kibana-basic-auth"
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+
+
+
+Step 4: 
 Add index pattern to discover our Logs 
 
 Follow : home > Stack management > index patterns
@@ -39,7 +53,7 @@ logstash-* and hit next step
 
 We have successfully added or index 
 
-Step 4:
+Step 5:
 Discover our logs
 
 Move to home page and hit discover
